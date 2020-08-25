@@ -2,9 +2,35 @@
   margin: 0;
 }
 
-.app-header {
+body {
+  background-color: #f5f6fa;
+}
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.app__header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   justify-content: space-between;
+}
+
+.app__header > h1 {
+  color: #275c1b;
+  font-size: 2rem;
+}
+
+.app__stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 999px) {
+  .app {
+    flex-direction: column;
+  }
 }
