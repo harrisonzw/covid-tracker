@@ -81,6 +81,12 @@ export default function LineGraph({ casesType }) {
     fetchData();
   }, [casesType]);
 
+  const getBackgroundColor = (casesType) => {
+    if (casesType === "cases") return "rgba(204,16,52, 0.5)";
+    else if (casesType === "death") return "rgb(105,105,105)";
+    else if (casesType === "recovered") return "rgba(125, 215, 29, 0.5)";
+  };
+
   return (
     <div>
       {data?.length > 0 && (
@@ -88,8 +94,8 @@ export default function LineGraph({ casesType }) {
           data={{
             datasets: [
               {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
+                backgroundColor: getBackgroundColor(casesType),
+                borderColor: getBackgroundColor(casesType),
                 data: data,
               },
             ],

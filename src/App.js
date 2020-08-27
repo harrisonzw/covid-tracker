@@ -93,7 +93,7 @@ const App = () => {
           <InfoBox
             onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
-            isRed
+            color={"red"}
             active={casesType === "cases"}
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={numeral(countryInfo.cases).format("0.0a")}
@@ -101,6 +101,7 @@ const App = () => {
           <InfoBox
             onClick={(e) => setCasesType("recovered")}
             title="Recovered"
+            color={"yellowgreen"}
             active={casesType === "recovered"}
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={numeral(countryInfo.recovered).format("0.0a")}
@@ -108,7 +109,7 @@ const App = () => {
           <InfoBox
             onClick={(e) => setCasesType("deaths")}
             title="Deaths"
-            isRed
+            color={"dimgray"}
             active={casesType === "deaths"}
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={numeral(countryInfo.deaths).format("0.0a")}
