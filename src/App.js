@@ -129,6 +129,13 @@ const App = () => {
             <Table countries={tableData} />
             <h3>Worldwide new {casesType}</h3>
             <LineGraph casesType={casesType} />
+
+            <div className="source">
+              Data sourced from:
+              <a href="https://corona.lmao.ninja/" target="_blank">
+                disease.sh - Open Disease Data
+              </a>
+            </div>
           </div>
         </CardContent>
       </Card>
