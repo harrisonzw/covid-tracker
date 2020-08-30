@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActionArea,
+} from "@material-ui/core";
+
 import "./InfoBox.css";
 
 function InfoBox({ title, color, cases, total, active, ...props }) {
@@ -12,26 +18,27 @@ function InfoBox({ title, color, cases, total, active, ...props }) {
   };
 
   return (
-    <Card
-      onClick={props.onClick}
-      className={`infoBox ${active && "infoBox--selected"} 
+   <CardActionArea>
+      <Card waves="light"
+        onClick={props.onClick}
+        className={`infoBox ${active && "infoBox--selected"} 
       }`}
-      style={{ borderColor: color }}
-    >
-      <CardContent>
-        <Typography color="textSecondary" gutterBottom>
-          <h3>{title}</h3>
-        </Typography>
+        style={{ borderColor: color }}
+      >
+        <CardContent>
+          <Typography color="textSecondary" gutterBottom>
+            <h3>{title}</h3>
+          </Typography>
 
-        <h2 className="infoBox__cases" style={{ color: color }}>
-          {cases}
-        </h2>
+          <h2 className="infoBox__cases" style={{ color: color }}>
+            {cases}
+          </h2>
 
-        <Typography className="infoBox__total" color="textSecondary">
-          {total} Total
-        </Typography>
-      </CardContent>
-    </Card>
+          <Typography className="infoBox__total" color="textSecondary">
+            {total} Total
+          </Typography>
+        </CardContent>
+      </Card></CardActionArea>
   );
 }
 
