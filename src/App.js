@@ -6,6 +6,7 @@ import {
   Select,
   Card,
   CardContent,
+  Typography,
 } from "@material-ui/core";
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
@@ -74,24 +75,27 @@ const App = () => {
   return (
     <div className="app">
       <div className="app__left">
-        <div className="app__header">
-          <h1>
-            <i class="fas fa-virus"></i> {"  "}
-            Harrison's COVID-19 Tracker
-          </h1>
-          <FormControl className="app__dropdown">
-            <Select
-              variant="outlined"
-              value={country}
-              onChange={onCountryChange}
-            >
-              <MenuItem value="worldwide">Worldwide</MenuItem>
-              {countries.map((country) => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
+        {" "}
+        <Card>
+          <div className="app__header">
+            <Typography variant="h1">
+              <i class="fas fa-virus"></i> {"  "}
+              Harrison's COVID-19 Tracker
+            </Typography>
+            <FormControl className="app__dropdown">
+              <Select
+                variant="outlined"
+                value={country}
+                onChange={onCountryChange}
+              >
+                <MenuItem value="worldwide">Worldwide</MenuItem>
+                {countries.map((country) => (
+                  <MenuItem value={country.value}>{country.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>{" "}
+        </Card>
         <div className="app__stats">
           <InfoBox
             onClick={(e) => setCasesType("cases")}

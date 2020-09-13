@@ -19,20 +19,23 @@ body {
 }
 
 .app__header {
-  padding: 10px;
+  padding: auto;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 20px 10px 20px 10px;
+  padding-bottom: 20px;
   justify-content: space-between;
 }
 
 .app__header > h1 {
   color: #275c1b;
+  font-weight: bold;
   font-size: 2rem;
 }
 
 .app__stats {
   display: flex;
+  margin-top: 20px;
 }
 
 .app__left {
