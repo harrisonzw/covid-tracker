@@ -1,14 +1,13 @@
-
 .infoBox {
   flex: 1;
 }
 
 .infoBox:not(:last-child) {
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .infoBox--selected {
-  border-top: 10px solid ;
+  border-bottom: 10px solid;
 }
 
 .infoBox__cases--green {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import React, { useState, useEffect } from 'react';
+import './App.css';
 import {
   MenuItem,
   FormControl,
@@ -7,27 +7,27 @@ import {
   Card,
   CardContent,
   Typography,
-} from "@material-ui/core";
-import InfoBox from "./InfoBox";
-import LineGraph from "./LineGraph";
-import Table from "./Table";
-import { sortData, prettyPrintStat } from "./utils";
-import numeral from "numeral";
-import Map from "./Map";
-import "leaflet/dist/leaflet.css";
+} from '@material-ui/core';
+import InfoBox from './InfoBox';
+import LineGraph from './LineGraph';
+import Table from './Table';
+import { sortData, prettyPrintStat } from './utils';
+import numeral from 'numeral';
+import Map from './Map';
+import 'leaflet/dist/leaflet.css';
 
 const App = () => {
-  const [country, setInputCountry] = useState("worldwide");
+  const [country, setInputCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
-  const [casesType, setCasesType] = useState("cases");
+  const [casesType, setCasesType] = useState('cases');
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
 
   useEffect(() => {
-    fetch("https://disease.sh/v3/covid-19/all")
+    fetch('https://disease.sh/v3/covid-19/all')
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
@@ -36,7 +36,7 @@ const App = () => {
 
   useEffect(() => {
     const getCountriesData = async () => {
-      fetch("https://disease.sh/v3/covid-19/countries")
+      fetch('https://disease.sh/v3/covid-19/countries')
         .then((response) => response.json())
         .then((data) => {
           const countries = data.map((country) => ({
@@ -57,8 +57,8 @@ const App = () => {
     const countryCode = e.target.value;
 
     const url =
-      countryCode === "worldwide"
-        ? "https://disease.sh/v3/covid-19/all"
+      countryCode === 'worldwide'
+        ? 'https://disease.sh/v3/covid-19/all'
         : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
     await fetch(url)
       .then((response) => response.json())
@@ -71,53 +71,55 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <div className="app__left">
-        {" "}
+    <div className='app'>
+      <div className='app__left'>
+        {' '}
         <Card>
-          <div className="app__header">
-            <Typography variant="h1">
-              <i class="fas fa-virus"></i> {"  "}
+          <div className='app__header'>
+            <Typography variant='h1'>
+              <i className='fas fa-virus'></i> {'  '}
               Harrison's COVID-19 Tracker
             </Typography>
-            <FormControl className="app__dropdown">
+            <FormControl className='app__dropdown'>
               <Select
-                variant="outlined"
+                variant='outlined'
                 value={country}
                 onChange={onCountryChange}
               >
-                <MenuItem value="worldwide">Worldwide</MenuItem>
-                {countries.map((country) => (
-                  <MenuItem value={country.value}>{country.name}</MenuItem>
+                <MenuItem value='worldwide'>Worldwide</MenuItem>
+                {countries.map((country, index) => (
+                  <MenuItem key={index} value={country.value}>
+                    {country.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
-          </div>{" "}
+          </div>{' '}
         </Card>
-        <div className="app__stats">
+        <div className='app__stats'>
           <InfoBox
-            onClick={(e) => setCasesType("cases")}
-            title="New Cases"
-            color={"red"}
-            active={casesType === "cases"}
+            onClick={(e) => setCasesType('cases')}
+            title='New Cases'
+            color={'red'}
+            active={casesType === 'cases'}
             cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format("0.0a")}
+            total={numeral(countryInfo.cases).format('0.0a')}
           />
           <InfoBox
-            onClick={(e) => setCasesType("recovered")}
-            title="Recovered"
-            color={"yellowgreen"}
-            active={casesType === "recovered"}
+            onClick={(e) => setCasesType('recovered')}
+            title='Recovered'
+            color={'yellowgreen'}
+            active={casesType === 'recovered'}
             cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numeral(countryInfo.recovered).format("0.0a")}
+            total={numeral(countryInfo.recovered).format('0.0a')}
           />
           <InfoBox
-            onClick={(e) => setCasesType("deaths")}
-            title="Deaths"
-            color={"dimgray"}
-            active={casesType === "deaths"}
+            onClick={(e) => setCasesType('deaths')}
+            title='Deaths'
+            color={'dimgray'}
+            active={casesType === 'deaths'}
             cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numeral(countryInfo.deaths).format("0.0a")}
+            total={numeral(countryInfo.deaths).format('0.0a')}
           />
         </div>
         <Map
@@ -127,17 +129,21 @@ const App = () => {
           zoom={mapZoom}
         />
       </div>
-      <Card className="app__right">
+      <Card className='app__right'>
         <CardContent>
-          <div className="app__information">
+          <div className='app__information'>
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
-            <h3>Worldwide new {casesType}</h3>
+            <h3>Worldwide recent {casesType}</h3>
             <LineGraph casesType={casesType} />
 
-            <div className="source">
-              Data sourced from:
-              <a href="https://corona.lmao.ninja/" target="_blank">
+            <div className='source'>
+              Data from:
+              <a
+                href='https://disease.sh/'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 disease.sh - Open Disease Data
               </a>
             </div>

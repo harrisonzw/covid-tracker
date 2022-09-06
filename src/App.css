@@ -22,8 +22,7 @@ body {
   padding: auto;
   display: flex;
   align-items: center;
-  padding: 20px 10px 20px 10px;
-  padding-bottom: 20px;
+  padding: 10px 10px 10px 10px;
   justify-content: space-between;
 }
 
@@ -31,6 +30,7 @@ body {
   color: #275c1b;
   font-weight: bold;
   font-size: 2rem;
+  margin: auto;
 }
 
 .app__stats {
@@ -42,6 +42,10 @@ body {
   flex: 0.9;
 }
 
+.app__right {
+  position: relative;
+}
+
 .app__information > h3 {
   color: #6a5d5d;
   font-weight: 400;
@@ -51,6 +55,12 @@ body {
 
 .app__information > h3:last-of-type {
   margin-top: 1rem;
+}
+
+.source {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 @media (max-width: 990px) {
