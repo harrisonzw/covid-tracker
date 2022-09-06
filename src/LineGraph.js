@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import numeral from "numeral";
+import React, { useState, useEffect } from 'react';
+import { Line } from 'react-chartjs-2';
+import numeral from 'numeral';
 
 const options = {
   legend: {
@@ -13,21 +13,22 @@ const options = {
   },
   maintainAspectRatio: false,
   tooltips: {
-    mode: "index",
+    mode: 'index',
     intersect: false,
     callbacks: {
       label: function (tooltipItem, data) {
-        return numeral(tooltipItem.value).format("+0,0");
+        return numeral(tooltipItem.value).format('+0,0');
       },
     },
   },
   scales: {
     xAxes: [
       {
-        type: "time",
+        type: 'time',
         time: {
-          format: "MM/DD/YY",
-          tooltipFormat: "ll",
+          displayFormats: {
+            quarter: 'MM/DD/YY',
+          },
         },
       },
     ],
@@ -39,7 +40,7 @@ const options = {
         ticks: {
           // Include a dollar sign in the ticks
           callback: function (value, index, values) {
-            return numeral(value).format("0a");
+            return numeral(value).format('0a');
           },
         },
       },
@@ -68,7 +69,7 @@ export default function LineGraph({ casesType }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
         .then((response) => {
           return response.json();
         })
@@ -82,9 +83,9 @@ export default function LineGraph({ casesType }) {
   }, [casesType]);
 
   const getBackgroundColor = (casesType) => {
-    if (casesType === "cases") return "rgba(204,16,52, 0.5)";
-    else if (casesType === "deaths") return "rgba(125, 125, 125, 0.5)";
-    else if (casesType === "recovered") return "rgba(125, 215, 29, 0.5)";
+    if (casesType === 'cases') return 'rgba(204,16,52, 0.5)';
+    else if (casesType === 'deaths') return 'rgba(125, 125, 125, 0.5)';
+    else if (casesType === 'recovered') return 'rgba(125, 215, 29, 0.5)';
   };
 
   return (

@@ -78,7 +78,7 @@ const App = () => {
           <div className='app__header'>
             <Typography variant='h1'>
               <i className='fas fa-virus'></i> {'  '}
-              COVID-19 Tracker
+              Worldwide COVID-19 Tracker
             </Typography>
             {/* <FormControl className='app__dropdown'>
               <Select
