@@ -78,9 +78,9 @@ const App = () => {
           <div className='app__header'>
             <Typography variant='h1'>
               <i className='fas fa-virus'></i> {'  '}
-              Harrison's COVID-19 Tracker
+              COVID-19 Tracker
             </Typography>
-            <FormControl className='app__dropdown'>
+            {/* <FormControl className='app__dropdown'>
               <Select
                 variant='outlined'
                 value={country}
@@ -93,7 +93,7 @@ const App = () => {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
           </div>{' '}
         </Card>
         <div className='app__stats'>
@@ -138,13 +138,13 @@ const App = () => {
             <LineGraph casesType={casesType} />
 
             <div className='source'>
-              Data from:
+              Data from:{' '}
               <a
                 href='https://disease.sh/'
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                disease.sh - Open Disease Data
+                Open Disease Data API
               </a>
             </div>
           </div>
