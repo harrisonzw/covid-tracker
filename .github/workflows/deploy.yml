@@ -2,8 +2,8 @@ name: Firebase Deploy
 
 on:
   push:
-    branches: 
-    - master
+    branches:
+      - master
 
 jobs:
   build:
@@ -20,4 +20,5 @@ jobs:
         with:
           args: deploy --only hosting
         env:
+          CI: ''
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
