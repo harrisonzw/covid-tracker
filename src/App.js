@@ -11,7 +11,7 @@ import {
 import InfoBox from './InfoBox';
 import LineGraph from './LineGraph';
 import Table from './Table';
-import { sortData, prettyPrintStat } from './utils';
+import { sortData, prettyPrintStat } from './helper';
 import numeral from 'numeral';
 import Map from './Map';
 import 'leaflet/dist/leaflet.css';
