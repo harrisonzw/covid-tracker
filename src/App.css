@@ -13,6 +13,11 @@ body {
   padding: 20px;
 }
 
+.mobile__dropdown {
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
 .app__dropdown {
   background-color: white;
   width: 10rem;
@@ -72,5 +77,9 @@ body {
 @media (max-width: 600px) {
   .app__header h1 {
     font-size: 1.4rem;
+  }
+
+  .app__dropdown {
+    width: 100%;
   }
 }

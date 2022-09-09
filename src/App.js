@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   Typography,
+  useMediaQuery,
 } from '@material-ui/core';
 import InfoBox from './InfoBox';
 import LineGraph from './LineGraph';
@@ -25,6 +26,8 @@ const App = () => {
   const [casesType, setCasesType] = useState('cases');
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
+
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
@@ -78,8 +81,31 @@ const App = () => {
           <div className='app__header'>
             <Typography variant='h1'>
               <i className='fas fa-virus'></i> {'  '}
-              Worldwide COVID-19 Tracker
+              COVID-19 Tracker
             </Typography>
+            {!isMobile && (
+              <FormControl
+                query='(min-device-width: 600px)'
+                className='app__dropdown'
+              >
+                <Select
+                  variant='outlined'
+                  value={country}
+                  onChange={onCountryChange}
+                >
+                  <MenuItem value='worldwide'>Worldwide</MenuItem>
+                  {countries.map((country, index) => (
+                    <MenuItem key={index} value={country.value}>
+                      {country.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
+          </div>{' '}
+        </Card>
+        {isMobile && (
+          <Card className='mobile__dropdown'>
             <FormControl className='app__dropdown'>
               <Select
                 variant='outlined'
@@ -94,8 +120,8 @@ const App = () => {
                 ))}
               </Select>
             </FormControl>
-          </div>{' '}
-        </Card>
+          </Card>
+        )}
         <div className='app__stats'>
           <InfoBox
             onClick={() => setCasesType('cases')}
