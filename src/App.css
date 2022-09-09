@@ -68,3 +68,9 @@ body {
     flex-direction: column;
   }
 }
+
+@media (max-width: 600px) {
+  .app__header h1 {
+    font-size: 1.4rem;
+  }
+}
