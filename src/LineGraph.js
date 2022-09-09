@@ -64,8 +64,25 @@ const buildChartData = (data, casesType) => {
   return chartData;
 };
 
+const buildChartVaccineData = (data, casesType) => {
+  let chartData = [];
+  let lastDataPoint;
+  for (let date in data.vaccinated) {
+    if (lastDataPoint) {
+      let newDataPoint = {
+        x: date,
+        y: data[casesType][date] - lastDataPoint,
+      };
+      chartData.push(newDataPoint);
+    }
+    lastDataPoint = data[casesType][date];
+  }
+  return chartData;
+};
+
 export default function LineGraph({ casesType }) {
   const [data, setData] = useState({});
+  const [vaccineData, setVaccineData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,28 +99,73 @@ export default function LineGraph({ casesType }) {
     fetchData();
   }, [casesType]);
 
+  useEffect(() => {
+    const fetchVaccineData = async () => {
+      await fetch(
+        'https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=250&fullData=false'
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((vaccineData) => {
+          let newData = { vaccinated: vaccineData };
+          let chartData = buildChartVaccineData(newData, 'vaccinated');
+          setVaccineData(chartData);
+        });
+    };
+
+    fetchVaccineData();
+  }, [casesType]);
+
   const getBackgroundColor = (casesType) => {
     if (casesType === 'cases') return 'rgba(204,16,52, 0.5)';
     else if (casesType === 'deaths') return 'rgba(125, 125, 125, 0.5)';
     else if (casesType === 'recovered') return 'rgba(125, 215, 29, 0.5)';
+    else if (casesType === 'vaccinated') return 'rgba(125, 215, 29, 0.5)';
   };
 
-  return (
-    <div>
-      {data?.length > 0 && (
-        <Line
-          data={{
-            datasets: [
-              {
-                backgroundColor: getBackgroundColor(casesType),
-                borderColor: getBackgroundColor(casesType),
-                data: data,
-              },
-            ],
-          }}
-          options={options}
-        />
-      )}
-    </div>
-  );
+  if (casesType === 'recovered') {
+    return (
+      <>
+        <h3>Worldwide recent vaccinated by month</h3>
+        <div>
+          {vaccineData.length > 0 && (
+            <Line
+              data={{
+                datasets: [
+                  {
+                    backgroundColor: getBackgroundColor('vaccinated'),
+                    borderColor: getBackgroundColor('vaccinated'),
+                    data: vaccineData,
+                  },
+                ],
+              }}
+              options={options}
+            />
+          )}
+        </div>
+      </>
+    );
+  } else
+    return (
+      <>
+        <h3>Worldwide recent {casesType} by month</h3>
+        <div>
+          {data?.length > 0 && (
+            <Line
+              data={{
+                datasets: [
+                  {
+                    backgroundColor: getBackgroundColor(casesType),
+                    borderColor: getBackgroundColor(casesType),
+                    data: data,
+                  },
+                ],
+              }}
+              options={options}
+            />
+          )}
+        </div>
+      </>
+    );
 }
