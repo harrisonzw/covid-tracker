@@ -1,8 +1,9 @@
 .infoBox {
   flex: 1;
+  min-height: 150px;
 }
 
-.infoBox:not(:last-child) {
+.infoBox {
   margin: 10px;
 }
 
@@ -21,7 +22,25 @@
 }
 
 .infoBox__total {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   font-size: 1.2rem !important;
   margin-top: 15px !important;
+}
+
+@media (max-width: 600px) {
+  .infoBox {
+    min-height: 140px;
+    max-width: 125px;
+    margin: 5px;
+  }
+
+  .infoBox__cases {
+    font-size: 1.2rem;
+  }
+
+  .infoBox__total {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    margin-top: 5px !important;
+  }
 }

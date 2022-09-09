@@ -99,7 +99,7 @@ const App = () => {
         <div className='app__stats'>
           <InfoBox
             onClick={(e) => setCasesType('cases')}
-            title='New Cases'
+            title='Cases'
             color={'red'}
             active={casesType === 'cases'}
             cases={prettyPrintStat(countryInfo.todayCases)}
