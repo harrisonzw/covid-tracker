@@ -134,8 +134,13 @@ const App = () => {
           <div className='app__information'>
             <h3>Total Cases by Country</h3>
             <Table countries={tableData} />
-            <h3>Worldwide recent {casesType}</h3>
-            <LineGraph casesType={casesType} />
+
+            <h3>Worldwide recent {casesType} by month</h3>
+            {casesType === 'recovered' ? (
+              <h4>data not available</h4>
+            ) : (
+              <LineGraph casesType={casesType} />
+            )}
 
             <div className='source'>
               Data from:{' '}
