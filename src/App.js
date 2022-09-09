@@ -80,7 +80,7 @@ const App = () => {
               <i className='fas fa-virus'></i> {'  '}
               Worldwide COVID-19 Tracker
             </Typography>
-            {/* <FormControl className='app__dropdown'>
+            <FormControl className='app__dropdown'>
               <Select
                 variant='outlined'
                 value={country}
@@ -93,12 +93,12 @@ const App = () => {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl> */}
+            </FormControl>
           </div>{' '}
         </Card>
         <div className='app__stats'>
           <InfoBox
-            onClick={(e) => setCasesType('cases')}
+            onClick={() => setCasesType('cases')}
             title='Cases'
             color={'red'}
             active={casesType === 'cases'}
@@ -106,7 +106,7 @@ const App = () => {
             total={numeral(countryInfo.cases).format('0.0a')}
           />
           <InfoBox
-            onClick={(e) => setCasesType('recovered')}
+            onClick={() => setCasesType('recovered')}
             title='Recovered'
             color={'yellowgreen'}
             active={casesType === 'recovered'}
