@@ -51,6 +51,20 @@ body {
   position: relative;
 }
 
+.app__bottom {
+  margin-bottom: auto;
+  margin-top: auto;
+  flex: 1;
+}
+
+.lineGraph {
+  height: 500px;
+}
+
+.vaccineTable {
+  height: 300px !important;
+}
+
 .app__information > h3 {
   color: #6a5d5d;
   font-weight: 400;
@@ -81,5 +95,9 @@ body {
 
   .app__dropdown {
     width: 100%;
+  }
+
+  .app__right {
+    margin-bottom: 1rem;
   }
 }

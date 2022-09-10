@@ -95,14 +95,13 @@ export default function LineGraph({ casesType }) {
           setData(chartData);
         });
     };
-
-    fetchData();
+    if (casesType !== 'vaccinated') fetchData();
   }, [casesType]);
 
   useEffect(() => {
     const fetchVaccineData = async () => {
       await fetch(
-        'https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=250&fullData=false'
+        'https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=365&fullData=false'
       )
         .then((response) => {
           return response.json();
@@ -124,10 +123,10 @@ export default function LineGraph({ casesType }) {
     else if (casesType === 'vaccinated') return 'rgba(125, 215, 29, 0.5)';
   };
 
-  if (casesType === 'recovered') {
+  if (casesType === 'vaccinated') {
     return (
       <>
-        <h3>Worldwide recent vaccinated by month</h3>
+        <h3>Worldwide vaccinated by month</h3>
         <div>
           {vaccineData.length > 0 && (
             <Line
@@ -149,7 +148,7 @@ export default function LineGraph({ casesType }) {
   } else
     return (
       <>
-        <h3>Worldwide recent {casesType} by month</h3>
+        <h3>Worldwide {casesType} by month</h3>
         <div>
           {data?.length > 0 && (
             <Line

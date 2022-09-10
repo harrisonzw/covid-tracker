@@ -35,6 +35,18 @@ export const sortData = (data) => {
   return sortedData;
 };
 
+export const sortVaccineData = (data) => {
+  let sortedData = [...data];
+  sortedData.sort((a, b) => {
+    if (a.vaccinated > b.vaccinated) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  return sortedData;
+};
+
 export const prettyPrintStat = (stat) =>
   stat ? `+${numeral(stat).format('0.0a')}` : '+0';
 

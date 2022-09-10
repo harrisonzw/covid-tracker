@@ -5,6 +5,10 @@
   color: #6a5d5d;
 }
 
+.table.short {
+  height: 300px;
+}
+
 .table tr {
   display: flex;
   justify-content: space-between;

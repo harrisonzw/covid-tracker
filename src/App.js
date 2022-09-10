@@ -12,7 +12,7 @@ import {
 import InfoBox from './InfoBox';
 import LineGraph from './LineGraph';
 import Table from './Table';
-import { sortData, prettyPrintStat } from './helper';
+import { sortData, sortVaccineData, prettyPrintStat } from './helper';
 import numeral from 'numeral';
 import Map from './Map';
 import 'leaflet/dist/leaflet.css';
@@ -22,7 +22,8 @@ const App = () => {
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
-  const [tableData, setTableData] = useState([]);
+  const [caseTableData, setCaseTableData] = useState([]);
+  const [vaccineTableData, setVaccineTableData] = useState([]);
   const [casesType, setCasesType] = useState('cases');
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
@@ -65,9 +66,12 @@ const App = () => {
               }));
 
               let sortedData = sortData(data);
+              setCaseTableData(sortedData);
+
+              let sortedVaccineData = sortVaccineData(data);
+              setVaccineTableData(sortedVaccineData);
               setCountries(countries);
               setMapCountries(data);
-              setTableData(sortedData);
             });
         });
     };
@@ -92,20 +96,39 @@ const App = () => {
   };
 
   return (
-    <div className='app'>
-      <div className='app__left'>
-        {' '}
-        <Card>
-          <div className='app__header'>
-            <Typography variant='h1'>
-              <i className='fas fa-virus'></i> {'  '}
-              COVID-19 Tracker
-            </Typography>
-            {!isMobile && (
-              <FormControl
-                query='(min-device-width: 600px)'
-                className='app__dropdown'
-              >
+    <>
+      <div className='app'>
+        <div className='app__left'>
+          <Card>
+            <div className='app__header'>
+              <Typography variant='h1'>
+                <i className='fas fa-virus'></i> {'  '}
+                COVID-19 Tracker
+              </Typography>
+              {!isMobile && (
+                <FormControl
+                  query='(min-device-width: 600px)'
+                  className='app__dropdown'
+                >
+                  <Select
+                    variant='outlined'
+                    value={country}
+                    onChange={onCountryChange}
+                  >
+                    <MenuItem value='worldwide'>Worldwide</MenuItem>
+                    {countries.map((country, index) => (
+                      <MenuItem key={index} value={country.value}>
+                        {country.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              )}
+            </div>
+          </Card>
+          {isMobile && (
+            <Card className='mobile__dropdown'>
+              <FormControl className='app__dropdown'>
                 <Select
                   variant='outlined'
                   value={country}
@@ -119,82 +142,76 @@ const App = () => {
                   ))}
                 </Select>
               </FormControl>
-            )}
-          </div>{' '}
-        </Card>
-        {isMobile && (
-          <Card className='mobile__dropdown'>
-            <FormControl className='app__dropdown'>
-              <Select
-                variant='outlined'
-                value={country}
-                onChange={onCountryChange}
-              >
-                <MenuItem value='worldwide'>Worldwide</MenuItem>
-                {countries.map((country, index) => (
-                  <MenuItem key={index} value={country.value}>
-                    {country.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Card>
-        )}
-        <div className='app__stats'>
-          <InfoBox
-            onClick={() => setCasesType('cases')}
-            title='Cases'
-            color={'red'}
-            active={casesType === 'cases'}
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format('0.0a')}
-          />
-          <InfoBox
-            onClick={() => setCasesType('recovered')}
-            title='Recovered'
-            color={'yellowgreen'}
-            active={casesType === 'recovered'}
-            cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numeral(countryInfo.recovered).format('0.0a')}
-          />
-          <InfoBox
-            onClick={(e) => setCasesType('deaths')}
-            title='Deaths'
-            color={'dimgray'}
-            active={casesType === 'deaths'}
-            cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numeral(countryInfo.deaths).format('0.0a')}
+            </Card>
+          )}
+          <div className='app__stats'>
+            <InfoBox
+              onClick={() => setCasesType('cases')}
+              title='Cases'
+              color={'red'}
+              active={casesType === 'cases'}
+              cases={prettyPrintStat(countryInfo.todayCases)}
+              total={numeral(countryInfo.cases).format('0.0a')}
+            />
+            <InfoBox
+              onClick={() => setCasesType('recovered')}
+              title='Recovered'
+              color={'yellowgreen'}
+              active={casesType === 'recovered'}
+              cases={prettyPrintStat(countryInfo.todayRecovered)}
+              total={numeral(countryInfo.recovered).format('0.0a')}
+            />
+            <InfoBox
+              onClick={(e) => setCasesType('deaths')}
+              title='Deaths'
+              color={'dimgray'}
+              active={casesType === 'deaths'}
+              cases={prettyPrintStat(countryInfo.todayDeaths)}
+              total={numeral(countryInfo.deaths).format('0.0a')}
+            />
+          </div>
+          <Map
+            countries={mapCountries}
+            casesType={casesType}
+            center={mapCenter}
+            zoom={mapZoom}
           />
         </div>
-        <Map
-          countries={mapCountries}
-          casesType={casesType}
-          center={mapCenter}
-          zoom={mapZoom}
-        />
-      </div>
-      <Card className='app__right'>
-        <CardContent>
-          <div className='app__information'>
-            <h3>Total Cases by Country</h3>
-            <Table countries={tableData} />
-
-            <LineGraph casesType={casesType} />
-
-            <div className='source'>
-              Data from:{' '}
-              <a
-                href='https://disease.sh/'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                Open Disease Data API
-              </a>
+        <Card className='app__right'>
+          <CardContent>
+            <div className='app__information'>
+              <h3>Total Cases by Country</h3>
+              <Table countries={caseTableData} dataType={'cases'} />
+              <LineGraph casesType={casesType} />
             </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          </CardContent>
+        </Card>
+        <Card className='app__right'>
+          <CardContent>
+            <div className='app__information'>
+              {' '}
+              <h3>Vaccination by Country</h3>
+              <Table
+                className='vaccineTable'
+                countries={vaccineTableData}
+                dataType={'vaccinated'}
+              />
+              <LineGraph className='lineGraph' casesType={'vaccinated'} />
+              <div className='source'>
+                Data from:{' '}
+                <a
+                  href='https://disease.sh/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  Open Disease Data API
+                </a>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 };
 
