@@ -66,6 +66,9 @@ export const showDataOnMap = (data, casesType = 'cases') =>
           <div className='info-deaths'>
             Deaths: {numeral(country.deaths).format('0,0')}
           </div>
+          <div className='info-deaths'>
+            Vaccinated: {numeral(country.vaccinated).format('0,0')}
+          </div>
         </div>
       </Popup>
     </Circle>

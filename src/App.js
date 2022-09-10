@@ -26,6 +26,7 @@ const App = () => {
   const [casesType, setCasesType] = useState('cases');
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
+  let countryVaccinated = {};
 
   const isMobile = useMediaQuery('(max-width:600px)');
 
@@ -39,17 +40,35 @@ const App = () => {
 
   useEffect(() => {
     const getCountriesData = async () => {
-      fetch('https://disease.sh/v3/covid-19/countries')
+      await fetch('https://disease.sh/v3/covid-19/countries')
         .then((response) => response.json())
         .then((data) => {
-          const countries = data.map((country) => ({
-            name: country.country,
-            value: country.countryInfo.iso2,
-          }));
-          let sortedData = sortData(data);
-          setCountries(countries);
-          setMapCountries(data);
-          setTableData(sortedData);
+          fetch(
+            'https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=1&fullData=false'
+          )
+            .then((response) => response.json())
+            .then((vaccineData) => {
+              // map of country: vaccinated
+              vaccineData.forEach((country) => {
+                countryVaccinated[country.country] = Object.values(
+                  country.timeline
+                )[0];
+              });
+              // add vaccinated number to each country
+              data.forEach((country) => {
+                const countryName = country.country;
+                country['vaccinated'] = countryVaccinated[countryName];
+              });
+              const countries = data.map((country) => ({
+                name: country.country,
+                value: country.countryInfo.iso2,
+              }));
+
+              let sortedData = sortData(data);
+              setCountries(countries);
+              setMapCountries(data);
+              setTableData(sortedData);
+            });
         });
     };
     getCountriesData();
