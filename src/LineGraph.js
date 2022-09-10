@@ -150,7 +150,10 @@ export default function LineGraph({ casesType }) {
       <>
         <h3>Worldwide {casesType} by month</h3>
         <div>
-          {data?.length > 0 && (
+          {casesType === 'recovered' && (
+            <h5 style={{ textAlign: 'center' }}>Data not available</h5>
+          )}
+          {data?.length > 0 && casesType !== 'recovered' && (
             <Line
               data={{
                 datasets: [
