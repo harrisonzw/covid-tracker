@@ -2,14 +2,20 @@ import React from 'react';
 import './Table.css';
 import numeral from 'numeral';
 
-function Table(props) {
+function Table({ data }) {
+  // sort the data by descending order
+  let sortedData = data.sort((a, b) => b.value - a.value);
   return (
     <div className='table'>
-      {props.countries.map((country, index) => (
+      {sortedData.map((country, index) => (
         <tr key={index}>
           <td>{country.country}</td>
           <td>
-            <strong>{numeral(country[props.dataType]).format('0.0a')}</strong>
+            <strong>
+              {country.value < 1000
+                ? country.value
+                : numeral(country.value).format('0.0a')}
+            </strong>
           </td>
         </tr>
       ))}

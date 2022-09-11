@@ -60,18 +60,29 @@ const App = () => {
                 const countryName = country.country;
                 country['vaccinated'] = countryVaccinated[countryName];
               });
-              const countries = data.map((country) => ({
-                name: country.country,
-                value: country.countryInfo.iso2,
-              }));
-
-              let sortedData = sortData(data);
-              setCaseTableData(sortedData);
-
-              let sortedVaccineData = sortVaccineData(data);
-              setVaccineTableData(sortedVaccineData);
-              setCountries(countries);
               setMapCountries(data);
+              let countries = [];
+              let caseData = [];
+              let vaccinatedData = [];
+              data.map((country) => {
+                countries.push({
+                  name: country.country,
+                  value: country.countryInfo.iso2,
+                });
+                caseData.push({
+                  country: country.country,
+                  value: country.cases,
+                });
+                if (country.vaccinated) {
+                  vaccinatedData.push({
+                    country: country.country,
+                    value: country.vaccinated,
+                  });
+                }
+              });
+              setCountries(countries);
+              setCaseTableData(caseData);
+              setVaccineTableData(vaccinatedData);
             });
         });
     };
@@ -181,7 +192,7 @@ const App = () => {
           <CardContent>
             <div className='app__information'>
               <h3>Total Cases by Country</h3>
-              <Table countries={caseTableData} dataType={'cases'} />
+              <Table data={caseTableData} />
               <LineGraph casesType={casesType} />
             </div>
           </CardContent>
@@ -191,11 +202,7 @@ const App = () => {
             <div className='app__information'>
               {' '}
               <h3>Vaccination by Country</h3>
-              <Table
-                className='vaccineTable'
-                countries={vaccineTableData}
-                dataType={'vaccinated'}
-              />
+              <Table className='vaccineTable' data={vaccineTableData} />
               <LineGraph className='lineGraph' casesType={'vaccinated'} />
               <div className='source'>
                 Data from:{' '}
