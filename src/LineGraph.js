@@ -126,7 +126,7 @@ export default function LineGraph({ casesType }) {
   if (casesType === 'vaccinated') {
     return (
       <>
-        <h3>Worldwide vaccinated by month</h3>
+        <h3>Total vaccinated by month</h3>
         <div>
           {vaccineData.length > 0 && (
             <Line
@@ -148,10 +148,10 @@ export default function LineGraph({ casesType }) {
   } else
     return (
       <>
-        <h3>Worldwide {casesType} by month</h3>
+        <h3>Total {casesType} by month</h3>
         <div>
           {casesType === 'recovered' && (
-            <h5 style={{ textAlign: 'center' }}>Data not available</h5>
+            <h4 style={{ textAlign: 'center' }}>Data not available</h4>
           )}
           {data?.length > 0 && casesType !== 'recovered' && (
             <Line

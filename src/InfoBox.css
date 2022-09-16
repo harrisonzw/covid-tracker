@@ -1,6 +1,6 @@
 .infoBox {
   flex: 1;
-  min-height: 150px;
+  min-height: 100px;
 }
 
 .infoBox:not(:last-child) {
@@ -13,6 +13,11 @@
 
 .infoBox__cases--green {
   color: #275c1b !important;
+}
+
+.infoBox__title {
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem;
 }
 
 .infoBox__cases {
@@ -34,6 +39,10 @@
   }
   .infoBox:not(:last-child) {
     margin: 5px;
+  }
+
+  .infoBox__title {
+    font-size: 1.2rem !important;
   }
 
   .infoBox__cases {

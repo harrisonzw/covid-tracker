@@ -10,7 +10,8 @@ body {
   display: flex;
   justify-content: space-evenly;
   background-color: #f5f6fa;
-  padding: 20px;
+  padding: 10px;
+  padding-top: 20px;
 }
 
 .mobile__dropdown {
@@ -23,16 +24,23 @@ body {
   width: 10rem;
 }
 
+.virus_img {
+  height: 1.7rem;
+  width: 1.7rem;
+  margin: auto;
+  /* margin: 10px auto auto auto; */
+}
+
 .app__header {
-  padding: auto;
   display: flex;
   align-items: center;
-  padding: 10px 10px 10px 10px;
+  vertical-align: middle;
+  padding: 10px;
   justify-content: space-between;
 }
 
 .app__header > h1 {
-  color: #275c1b;
+  color: #a30321;
   font-weight: bold;
   font-size: 2rem;
   margin: auto;
@@ -40,7 +48,7 @@ body {
 
 .app__stats {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .app__left {
@@ -79,7 +87,14 @@ body {
 .source {
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  bottom: 5px;
+}
+
+/* desktop only */
+@media (min-width: 600px) {
+  .app__information {
+    max-width: 300px;
+  }
 }
 
 @media (max-width: 990px) {
@@ -88,6 +103,7 @@ body {
   }
 }
 
+/* mobile only */
 @media (max-width: 600px) {
   .app__header h1 {
     font-size: 1.4rem;

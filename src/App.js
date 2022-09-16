@@ -12,7 +12,7 @@ import {
 import InfoBox from './InfoBox';
 import LineGraph from './LineGraph';
 import Table from './Table';
-import { sortData, sortVaccineData, prettyPrintStat } from './helper';
+import { prettyPrintStat } from './helper';
 import numeral from 'numeral';
 import Map from './Map';
 import 'leaflet/dist/leaflet.css';
@@ -26,7 +26,7 @@ const App = () => {
   const [vaccineTableData, setVaccineTableData] = useState([]);
   const [casesType, setCasesType] = useState('cases');
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
-  const [mapZoom, setMapZoom] = useState(3);
+  const [mapZoom, setMapZoom] = useState(2.5);
   let countryVaccinated = {};
 
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -113,8 +113,8 @@ const App = () => {
           <Card>
             <div className='app__header'>
               <Typography variant='h1'>
-                <i className='fas fa-virus'></i> {'  '}
-                COVID-19 Tracker
+                {/* <img className='virus_img' src='/covid-virus-image.png' /> */}
+                C<i className='fas fa-virus'></i>VID-19 Tracker
               </Typography>
               {!isMobile && (
                 <FormControl
@@ -207,7 +207,7 @@ const App = () => {
               <div className='source'>
                 Data from:{' '}
                 <a
-                  href='https://disease.sh/'
+                  href='https://disease.sh/docs/'
                   target='_blank'
                   rel='noopener noreferrer'
                 >

@@ -26,14 +26,14 @@ function InfoBox({ title, color, cases, total, active, ...props }) {
         style={getColor()}
       >
         <CardContent>
-          <Typography
+          <h2
             color='textSecondary'
             gutterBottom
             style={{ color: color }}
+            className='infoBox__title'
           >
-            <h4>{title}</h4>
-          </Typography>
-
+            {title}
+          </h2>
           <h2 className='infoBox__cases' style={{ color: color }}>
             {cases}
           </h2>
