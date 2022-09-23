@@ -3,6 +3,8 @@
   overflow: scroll;
   height: 500px;
   color: #6a5d5d;
+  overflow-x: hidden;
+  scrollbar-width: thin;
 }
 
 .table.short {

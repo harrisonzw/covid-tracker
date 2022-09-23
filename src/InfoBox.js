@@ -17,14 +17,14 @@ function InfoBox({ title, color, cases, total, active, ...props }) {
   };
 
   return (
-    <CardActionArea>
-      <Card
-        waves='light'
-        onClick={props.onClick}
-        className={`infoBox ${active && 'infoBox--selected'} 
+    <Card
+      waves='light'
+      onClick={props.onClick}
+      className={`infoBox ${active && 'infoBox--selected'} 
       }`}
-        style={getColor()}
-      >
+      style={getColor()}
+    >
+      <CardActionArea>
         <CardContent>
           <h2
             color='textSecondary'
@@ -42,8 +42,8 @@ function InfoBox({ title, color, cases, total, active, ...props }) {
             {total} Total
           </Typography>
         </CardContent>
-      </Card>
-    </CardActionArea>
+      </CardActionArea>
+    </Card>
   );
 }
 

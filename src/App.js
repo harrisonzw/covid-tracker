@@ -200,7 +200,6 @@ const App = () => {
         <Card className='app__right'>
           <CardContent>
             <div className='app__information'>
-              {' '}
               <h3>Vaccination by Country</h3>
               <Table className='vaccineTable' data={vaccineTableData} />
               <LineGraph className='lineGraph' casesType={'vaccinated'} />
