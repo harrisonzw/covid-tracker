@@ -21,7 +21,7 @@ function InfoBox({ title, color, cases, total, active, ...props }) {
       waves='light'
       onClick={props.onClick}
       className={`infoBox ${active && 'infoBox--selected'} 
-      }`}
+  }`}
       style={getColor()}
     >
       <CardActionArea>

@@ -7,6 +7,10 @@
   margin-right: 10px;
 }
 
+.infoBox__content {
+  padding-left: 10px;
+}
+
 .infoBox--selected {
   border-bottom: 10px solid;
 }
