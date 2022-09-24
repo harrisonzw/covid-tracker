@@ -113,7 +113,6 @@ const App = () => {
           <Card>
             <div className='app__header'>
               <Typography variant='h1'>
-                {/* <img className='virus_img' src='/covid-virus-image.png' /> */}
                 C<i className='fas fa-virus'></i>VID-19 Tracker
               </Typography>
               {!isMobile && (

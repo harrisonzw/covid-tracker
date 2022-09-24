@@ -27,7 +27,6 @@ function InfoBox({ title, color, cases, total, active, ...props }) {
         <CardContent>
           <h2
             color='textSecondary'
-            gutterBottom
             style={{ color: color }}
             className='infoBox__title'
           >

@@ -24,13 +24,6 @@ body {
   width: 10rem;
 }
 
-.virus_img {
-  height: 1.7rem;
-  width: 1.7rem;
-  margin: auto;
-  /* margin: 10px auto auto auto; */
-}
-
 .app__header {
   display: flex;
   align-items: center;
