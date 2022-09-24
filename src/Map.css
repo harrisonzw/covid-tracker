@@ -19,11 +19,6 @@
   border-radius: 5px;
 }
 
-.info-flag img {
-  width: 150px;
-  border-radius: 2px;
-}
-
 .info-name {
   font-size: 20px;
   font-weight: bold;
@@ -35,10 +30,15 @@
 }
 
 .info-flag {
-  height: 80px;
+  height: 100px;
   width: 100%;
   background-size: cover;
   border-radius: 8px;
+}
+
+.info-flag img {
+  width: 100px;
+  border-radius: 2px;
 }
 
 .info-confirmed,
