@@ -162,15 +162,23 @@ const App = () => {
               color={'red'}
               active={casesType === 'cases'}
               cases={prettyPrintStat(countryInfo.todayCases)}
-              total={numeral(countryInfo.cases).format('0.0a')}
+              total={
+                countryInfo.cases < 1000
+                  ? setCountryInfo.cases
+                  : numeral(countryInfo.cases).format('0.0a')
+              }
             />
             <InfoBox
               onClick={() => setCasesType('recovered')}
               title='Recovered'
-              color={'yellowgreen'}
+              color={'seagreen'}
               active={casesType === 'recovered'}
               cases={prettyPrintStat(countryInfo.todayRecovered)}
-              total={numeral(countryInfo.recovered).format('0.0a')}
+              total={
+                countryInfo.cases < 1000
+                  ? setCountryInfo.recovered
+                  : numeral(countryInfo.recovered).format('0.0a')
+              }
             />
             <InfoBox
               onClick={(e) => setCasesType('deaths')}
@@ -178,7 +186,11 @@ const App = () => {
               color={'dimgray'}
               active={casesType === 'deaths'}
               cases={prettyPrintStat(countryInfo.todayDeaths)}
-              total={numeral(countryInfo.deaths).format('0.0a')}
+              total={
+                countryInfo.cases < 1000
+                  ? setCountryInfo.deaths
+                  : numeral(countryInfo.deaths).format('0.0a')
+              }
             />
           </div>
           <Map

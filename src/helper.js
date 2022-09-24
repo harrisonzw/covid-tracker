@@ -10,9 +10,9 @@ const casesTypeColors = {
     multiplier: 50,
   },
   recovered: {
-    hex: '#7dd71d',
-    rgb: 'rgb(125, 215, 29)',
-    half_op: 'rgba(125, 215, 29, 0.5)',
+    hex: '#2E8B57',
+    rgb: 'rgb( 46, 139, 87)',
+    half_op: 'rgba( 46, 139, 87, 0.5)',
     multiplier: 50,
   },
   deaths: {
@@ -78,7 +78,7 @@ export const showDataOnMap = (data, casesType = 'cases') =>
           <div className='info-deaths'>
             Deaths: {numeral(country.deaths).format('0,0')}
           </div>
-          <div className='info-deaths'>
+          <div className='info-vaccinated'>
             Vaccinated: {numeral(country.vaccinated).format('0,0')}
           </div>
         </div>

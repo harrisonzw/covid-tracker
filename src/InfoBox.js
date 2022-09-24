@@ -11,8 +11,7 @@ import './InfoBox.css';
 function InfoBox({ title, color, cases, total, active, ...props }) {
   const getColor = () => {
     if (title === 'Cases') return { borderColor: 'rgba(204,16,52, 0.5)' };
-    else if (title === 'Recovered')
-      return { borderColor: 'rgba(125, 215, 29, 0.5)' };
+    else if (title === 'Recovered') return { borderColor: '#2E8B57' };
     else return { borderColor: 'rgb(105,105,105)' };
   };
 
