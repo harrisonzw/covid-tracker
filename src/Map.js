@@ -18,7 +18,7 @@ export default function Map({ countries, casesType, center, zoom }) {
         />
         {showDataOnMap(countries, casesType)}
       </LeafletMap>
-      <h5 className='tip'> Click on each circle to view country details </h5>
+      <h6 className='tip'> Click on each circle to view country details </h6>
     </div>
   );
 }
