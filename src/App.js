@@ -106,7 +106,6 @@ const App = () => {
       });
   };
 
-  console.log('country ', country, countryInfo);
   return (
     <>
       <div className='app'>
