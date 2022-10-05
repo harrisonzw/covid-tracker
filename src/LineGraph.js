@@ -120,7 +120,7 @@ export default function LineGraph({ casesType }) {
     if (casesType === 'cases') return 'rgba(204,16,52, 0.5)';
     else if (casesType === 'deaths') return 'rgba(125, 125, 125, 0.5)';
     else if (casesType === 'recovered') return 'rgba(125, 215, 29, 0.5)';
-    else if (casesType === 'vaccinated') return 'rgba(125, 215, 29, 0.5)';
+    else if (casesType === 'vaccinated') return 'rgba(249, 105, 14, 0.5)';
   };
 
   if (casesType === 'vaccinated') {
