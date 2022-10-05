@@ -19,6 +19,10 @@
   border-radius: 5px;
 }
 
+.tip {
+  color: rgb(91, 89, 89);
+}
+
 .info-name {
   font-size: 20px;
   font-weight: bold;
