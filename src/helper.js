@@ -47,8 +47,11 @@ export const sortVaccineData = (data) => {
   return sortedData;
 };
 
-export const prettyPrintStat = (stat) =>
-  stat ? `+${numeral(stat).format('0.0a')}` : '+0';
+export const prettyPrintStat = (stat) => {
+  if (!stat) return '+0';
+  else if (stat < 10000) return '+' + stat;
+  else return `+${numeral(stat).format('0.0a')}`;
+};
 
 export const showDataOnMap = (data, casesType = 'cases') =>
   data.map((country, index) => (

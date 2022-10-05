@@ -106,6 +106,7 @@ const App = () => {
       });
   };
 
+  console.log('country ', country, countryInfo);
   return (
     <>
       <div className='app'>
@@ -115,7 +116,7 @@ const App = () => {
               <Typography variant='h1'>
                 C<i className='fas fa-virus'></i>VID-19 Tracker
               </Typography>
-              {!isMobile && (
+              {/* {!isMobile && (
                 <FormControl
                   query='(min-device-width: 600px)'
                   className='app__dropdown'
@@ -133,10 +134,10 @@ const App = () => {
                     ))}
                   </Select>
                 </FormControl>
-              )}
+              )} */}
             </div>
           </Card>
-          {isMobile && (
+          {/* {isMobile && (
             <Card className='mobile__dropdown'>
               <FormControl className='app__dropdown'>
                 <Select
@@ -153,7 +154,7 @@ const App = () => {
                 </Select>
               </FormControl>
             </Card>
-          )}
+          )} */}
           <div className='app__stats'>
             <InfoBox
               onClick={() => setCasesType('cases')}
@@ -161,11 +162,7 @@ const App = () => {
               color={'red'}
               active={casesType === 'cases'}
               cases={prettyPrintStat(countryInfo.todayCases)}
-              total={
-                countryInfo.cases < 1000
-                  ? setCountryInfo.cases
-                  : numeral(countryInfo.cases).format('0.0a')
-              }
+              total={prettyPrintStat(countryInfo.cases)}
             />
             <InfoBox
               onClick={() => setCasesType('recovered')}
@@ -173,11 +170,7 @@ const App = () => {
               color={'seagreen'}
               active={casesType === 'recovered'}
               cases={prettyPrintStat(countryInfo.todayRecovered)}
-              total={
-                countryInfo.cases < 1000
-                  ? setCountryInfo.recovered
-                  : numeral(countryInfo.recovered).format('0.0a')
-              }
+              total={prettyPrintStat(countryInfo.recovered)}
             />
             <InfoBox
               onClick={(e) => setCasesType('deaths')}
@@ -185,11 +178,7 @@ const App = () => {
               color={'dimgray'}
               active={casesType === 'deaths'}
               cases={prettyPrintStat(countryInfo.todayDeaths)}
-              total={
-                countryInfo.cases < 1000
-                  ? setCountryInfo.deaths
-                  : numeral(countryInfo.deaths).format('0.0a')
-              }
+              total={prettyPrintStat(countryInfo.deaths)}
             />
           </div>
           <Map

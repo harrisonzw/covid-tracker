@@ -5,7 +5,6 @@ import {
   Typography,
   CardActionArea,
 } from '@material-ui/core';
-
 import './InfoBox.css';
 
 function InfoBox({ title, color, cases, total, active, ...props }) {
