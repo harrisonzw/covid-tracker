@@ -8,6 +8,7 @@ import {
   CardContent,
   Typography,
   useMediaQuery,
+  CircularProgress,
 } from '@material-ui/core';
 import InfoBox from './InfoBox';
 import LineGraph from './LineGraph';
@@ -18,6 +19,7 @@ import Map from './Map';
 import 'leaflet/dist/leaflet.css';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [country, setInputCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
@@ -83,6 +85,9 @@ const App = () => {
               setCountries(countries);
               setCaseTableData(caseData);
               setVaccineTableData(vaccinatedData);
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 2000);
             });
         });
     };
@@ -108,14 +113,17 @@ const App = () => {
 
   return (
     <>
-      <div className='app'>
-        <div className='app__left'>
-          <Card>
-            <div className='app__header'>
-              <Typography variant='h1'>
-                C<i className='fas fa-virus'></i>VID-19 Tracker
-              </Typography>
-              {/* {!isMobile && (
+      {isLoading ? (
+        <CircularProgress className='loading' color='secondary' />
+      ) : (
+        <div className='app'>
+          <div className='app__left'>
+            <Card>
+              <div className='app__header'>
+                <Typography variant='h1'>
+                  C<i className='fas fa-virus'></i>VID-19 Tracker
+                </Typography>
+                {/* {!isMobile && (
                 <FormControl
                   query='(min-device-width: 600px)'
                   className='app__dropdown'
@@ -134,9 +142,9 @@ const App = () => {
                   </Select>
                 </FormControl>
               )} */}
-            </div>
-          </Card>
-          {/* {isMobile && (
+              </div>
+            </Card>
+            {/* {isMobile && (
             <Card className='mobile__dropdown'>
               <FormControl className='app__dropdown'>
                 <Select
@@ -154,68 +162,69 @@ const App = () => {
               </FormControl>
             </Card>
           )} */}
-          <div className='app__stats'>
-            <InfoBox
-              onClick={() => setCasesType('cases')}
-              title='Cases'
-              color={'red'}
-              active={casesType === 'cases'}
-              cases={prettyPrintStat(countryInfo.todayCases)}
-              total={prettyPrintStat(countryInfo.cases)}
-            />
-            <InfoBox
-              onClick={() => setCasesType('recovered')}
-              title='Recovered'
-              color={'seagreen'}
-              active={casesType === 'recovered'}
-              cases={prettyPrintStat(countryInfo.todayRecovered)}
-              total={prettyPrintStat(countryInfo.recovered)}
-            />
-            <InfoBox
-              onClick={(e) => setCasesType('deaths')}
-              title='Deaths'
-              color={'dimgray'}
-              active={casesType === 'deaths'}
-              cases={prettyPrintStat(countryInfo.todayDeaths)}
-              total={prettyPrintStat(countryInfo.deaths)}
+            <div className='app__stats'>
+              <InfoBox
+                onClick={() => setCasesType('cases')}
+                title='Cases'
+                color={'red'}
+                active={casesType === 'cases'}
+                cases={prettyPrintStat(countryInfo.todayCases)}
+                total={prettyPrintStat(countryInfo.cases)}
+              />
+              <InfoBox
+                onClick={() => setCasesType('recovered')}
+                title='Recovered'
+                color={'seagreen'}
+                active={casesType === 'recovered'}
+                cases={prettyPrintStat(countryInfo.todayRecovered)}
+                total={prettyPrintStat(countryInfo.recovered)}
+              />
+              <InfoBox
+                onClick={(e) => setCasesType('deaths')}
+                title='Deaths'
+                color={'dimgray'}
+                active={casesType === 'deaths'}
+                cases={prettyPrintStat(countryInfo.todayDeaths)}
+                total={prettyPrintStat(countryInfo.deaths)}
+              />
+            </div>
+            <Map
+              countries={mapCountries}
+              casesType={casesType}
+              center={mapCenter}
+              zoom={mapZoom}
             />
           </div>
-          <Map
-            countries={mapCountries}
-            casesType={casesType}
-            center={mapCenter}
-            zoom={mapZoom}
-          />
-        </div>
-        <Card className='app__right'>
-          <CardContent>
-            <div className='app__information'>
-              <h3>Total Cases by Country</h3>
-              <Table data={caseTableData} />
-              <LineGraph casesType={casesType} />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className='app__right'>
-          <CardContent>
-            <div className='app__information'>
-              <h3>Vaccination by Country</h3>
-              <Table className='vaccineTable' data={vaccineTableData} />
-              <LineGraph className='lineGraph' casesType={'vaccinated'} />
-              <div className='source'>
-                Data from:{' '}
-                <a
-                  href='https://disease.sh/docs/'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  Open Disease Data API
-                </a>
+          <Card className='app__right'>
+            <CardContent>
+              <div className='app__information'>
+                <h3>Total Cases by Country</h3>
+                <Table data={caseTableData} />
+                <LineGraph casesType={casesType} />
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+          <Card className='app__right'>
+            <CardContent>
+              <div className='app__information'>
+                <h3>Vaccination by Country</h3>
+                <Table className='vaccineTable' data={vaccineTableData} />
+                <LineGraph className='lineGraph' casesType={'vaccinated'} />
+                <div className='source'>
+                  Data from:{' '}
+                  <a
+                    href='https://disease.sh/docs/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    Open Disease Data API
+                  </a>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </>
   );
 };
