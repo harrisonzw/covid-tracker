@@ -49,8 +49,7 @@ body {
 
 .app__stats {
   display: flex;
-  margin: 10px auto;
-  justify-content: space-evenly;
+  margin: 10px 0 10px 0;
 }
 
 .app__left {
@@ -59,12 +58,6 @@ body {
 
 .app__right {
   position: relative;
-}
-
-.app__bottom {
-  margin-bottom: auto;
-  margin-top: auto;
-  flex: 1;
 }
 
 .lineGraphContainer {
@@ -90,7 +83,7 @@ body {
 /* desktop only */
 @media (min-width: 600px) and (min-height: 400px) {
   .app__header {
-    height: 5vh;
+    max-height: 5vh;
   }
 
   .app__stats {
@@ -102,7 +95,7 @@ body {
   }
 
   .lineGraphContainer {
-    height: 22vh;
+    min-height: 22.5vh;
   }
 }
 
