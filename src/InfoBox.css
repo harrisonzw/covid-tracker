@@ -1,6 +1,5 @@
 .infoBox {
   flex: 1;
-  min-height: 100px;
   text-align: left;
 }
 
@@ -35,16 +34,16 @@
 
 @media (max-width: 600px) {
   .infoBox {
-    min-height: 15vh;
     max-width: 33vw;
     margin: 1px 0 1px 0;
   }
+
   .infoBox:not(:last-child) {
     margin-right: 5px;
   }
 
   .infoBox__title {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
   }
 
   .infoBox__cases {
