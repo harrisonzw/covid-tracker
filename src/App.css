@@ -67,29 +67,25 @@ body {
   flex: 1;
 }
 
-.lineGraph {
-  height: 500px;
+.lineGraphContainer {
+  margin-bottom: 20px;
+  height: 22vh;
 }
 
-.vaccineTable {
-  height: 300px !important;
+.lineGraph {
+  margin-top: 10px;
 }
 
 .app__information > h3 {
   color: #6a5d5d;
   font-weight: 400;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.app__information > h3:last-of-type {
-  margin-top: 1rem;
 }
 
 .source {
   position: absolute;
-  right: 10px;
-  bottom: 5px;
+  right: 20px;
+  bottom: 3px;
 }
 
 /* desktop only */
@@ -113,6 +109,10 @@ body {
 
   .app__dropdown {
     width: 100%;
+  }
+
+  .app__stats {
+    margin: 2px auto;
   }
 
   .app__right {

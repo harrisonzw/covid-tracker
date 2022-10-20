@@ -1,14 +1,10 @@
 .table {
-  margin-top: 20px;
+  margin-top: 10px;
   overflow: scroll;
-  height: 500px;
+  height: 65.5vh;
   color: #6a5d5d;
   overflow-x: hidden;
   scrollbar-width: thin;
-}
-
-.table.short {
-  height: 300px;
 }
 
 .table tr {

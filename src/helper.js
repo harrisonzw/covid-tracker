@@ -48,9 +48,9 @@ export const sortVaccineData = (data) => {
 };
 
 export const prettyPrintStat = (stat) => {
-  if (!stat) return '+0';
-  else if (stat < 10000) return '+' + stat;
-  else return `+${numeral(stat).format('0.0a')}`;
+  if (!stat) return '0';
+  else if (stat < 10000) return stat;
+  else return `${numeral(stat).format('0.0a')}`;
 };
 
 export const showDataOnMap = (data, casesType = 'cases') =>

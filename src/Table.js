@@ -7,18 +7,22 @@ function Table({ data }) {
   let sortedData = data.sort((a, b) => b.value - a.value);
   return (
     <div className='table'>
-      {sortedData.map((country, index) => (
-        <tr key={index}>
-          <td>{country.country}</td>
-          <td>
-            <strong>
-              {country.value < 1000
-                ? country.value
-                : numeral(country.value).format('0.0a')}
-            </strong>
-          </td>
-        </tr>
-      ))}
+      <table>
+        <tbody>
+          {sortedData.map((country, index) => (
+            <tr key={index}>
+              <td>{country.country}</td>
+              <td>
+                <strong>
+                  {country.value < 1000
+                    ? country.value
+                    : numeral(country.value).format('0.0a')}
+                </strong>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -14,7 +14,6 @@ import InfoBox from './InfoBox';
 import LineGraph from './LineGraph';
 import Table from './Table';
 import { prettyPrintStat } from './helper';
-import numeral from 'numeral';
 import Map from './Map';
 import 'leaflet/dist/leaflet.css';
 
@@ -87,7 +86,7 @@ const App = () => {
               setVaccineTableData(vaccinatedData);
               setTimeout(() => {
                 setIsLoading(false);
-              }, 2000);
+              }, 1000);
             });
         });
     };
@@ -121,7 +120,7 @@ const App = () => {
             <Card>
               <div className='app__header'>
                 <Typography variant='h1'>
-                  C<i className='fas fa-virus'></i>VID-19 Tracker
+                  Worldwide C<i className='fas fa-virus'></i>VID-19 Tracker
                 </Typography>
                 {/* {!isMobile && (
                 <FormControl
@@ -195,34 +194,56 @@ const App = () => {
               zoom={mapZoom}
             />
           </div>
-          <Card className='app__right'>
-            <CardContent>
-              <div className='app__information'>
-                <h3>Total Cases by Country</h3>
-                <Table data={caseTableData} />
-                <LineGraph casesType={casesType} />
-              </div>
-            </CardContent>
-          </Card>
-          <Card className='app__right'>
-            <CardContent>
-              <div className='app__information'>
-                <h3>Vaccination by Country</h3>
-                <Table className='vaccineTable' data={vaccineTableData} />
-                <LineGraph className='lineGraph' casesType={'vaccinated'} />
-                <div className='source'>
-                  Data from:{' '}
-                  <a
-                    href='https://disease.sh/docs/'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    Open Disease Data API
-                  </a>
+          <div className='app__right'>
+            <Card className='lineGraphContainer'>
+              <CardContent>
+                <div className='app__information'>
+                  <h3>Total {casesType} by month</h3>
+                  <div className='lineGraph'>
+                    <LineGraph casesType={casesType} />
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent>
+                <div className='app__information'>
+                  <h3>Total Cases by Country</h3>
+                  <Table data={caseTableData} />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          <div className='app__right'>
+            <Card className='lineGraphContainer'>
+              <CardContent>
+                <div className='app__information'>
+                  <h3>Total vaccinated by month</h3>
+                  <div className='lineGraph'>
+                    <LineGraph casesType={'vaccinated'} />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent>
+                <div className='app__information'>
+                  <h3>Vaccination by Country</h3>
+                  <Table data={vaccineTableData} />
+                </div>
+              </CardContent>
+            </Card>
+            <div className='source'>
+              Data from:{' '}
+              <a
+                href='https://disease.sh/docs/'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Open Disease Data API
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </>

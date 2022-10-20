@@ -125,49 +125,43 @@ export default function LineGraph({ casesType }) {
 
   if (casesType === 'vaccinated') {
     return (
-      <>
-        <h3>Total vaccinated by month</h3>
-        <div>
-          {vaccineData.length > 0 && (
-            <Line
-              data={{
-                datasets: [
-                  {
-                    backgroundColor: getBackgroundColor('vaccinated'),
-                    borderColor: getBackgroundColor('vaccinated'),
-                    data: vaccineData,
-                  },
-                ],
-              }}
-              options={options}
-            />
-          )}
-        </div>
-      </>
+      <div>
+        {vaccineData.length > 0 && (
+          <Line
+            data={{
+              datasets: [
+                {
+                  backgroundColor: getBackgroundColor('vaccinated'),
+                  borderColor: getBackgroundColor('vaccinated'),
+                  data: vaccineData,
+                },
+              ],
+            }}
+            options={options}
+          />
+        )}
+      </div>
     );
   } else
     return (
-      <>
-        <h3>Total {casesType} by month</h3>
-        <div>
-          {casesType === 'recovered' && (
-            <h4 style={{ textAlign: 'center' }}>Data not available</h4>
-          )}
-          {data?.length > 0 && casesType !== 'recovered' && (
-            <Line
-              data={{
-                datasets: [
-                  {
-                    backgroundColor: getBackgroundColor(casesType),
-                    borderColor: getBackgroundColor(casesType),
-                    data: data,
-                  },
-                ],
-              }}
-              options={options}
-            />
-          )}
-        </div>
-      </>
+      <div>
+        {casesType === 'recovered' && (
+          <h4 style={{ textAlign: 'center' }}>Data not available</h4>
+        )}
+        {data?.length > 0 && casesType !== 'recovered' && (
+          <Line
+            data={{
+              datasets: [
+                {
+                  backgroundColor: getBackgroundColor(casesType),
+                  borderColor: getBackgroundColor(casesType),
+                  data: data,
+                },
+              ],
+            }}
+            options={options}
+          />
+        )}
+      </div>
     );
 }

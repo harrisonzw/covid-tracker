@@ -1,5 +1,5 @@
 .map {
-  height: 555px;
+  height: 70vh;
   background-color: white;
   padding: 15px;
   border-radius: 5px;
@@ -10,6 +10,8 @@
 
 @media (max-width: 600px) {
   .map {
+    height: 65vh;
+    margin-top: 5px;
     margin-bottom: 10px;
   }
 }
@@ -21,7 +23,6 @@
 
 .tip {
   color: rgb(91, 89, 89);
-  
 }
 
 .info-name {
