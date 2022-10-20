@@ -30,8 +30,6 @@ const App = () => {
   const [mapZoom, setMapZoom] = useState(2.5);
   let countryVaccinated = {};
 
-  const isMobile = useMediaQuery('(max-width:600px)');
-
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
       .then((response) => response.json())
@@ -65,22 +63,23 @@ const App = () => {
               let countries = [];
               let caseData = [];
               let vaccinatedData = [];
-              data.map((country) => {
+              data.forEach((countryData) => {
                 countries.push({
-                  name: country.country,
-                  value: country.countryInfo.iso2,
+                  name: countryData.country,
+                  value: countryData.countryInfo.iso2,
                 });
                 caseData.push({
-                  country: country.country,
-                  value: country.cases,
+                  country: countryData.country,
+                  value: countryData.cases,
                 });
-                if (country.vaccinated) {
+                if (countryData.vaccinated) {
                   vaccinatedData.push({
-                    country: country.country,
-                    value: country.vaccinated,
+                    country: countryData.country,
+                    value: countryData.vaccinated,
                   });
                 }
               });
+
               setCountries(countries);
               setCaseTableData(caseData);
               setVaccineTableData(vaccinatedData);
