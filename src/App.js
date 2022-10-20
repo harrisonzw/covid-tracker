@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import {
-  MenuItem,
-  FormControl,
-  Select,
   Card,
   CardContent,
   Typography,
-  useMediaQuery,
   CircularProgress,
 } from '@material-ui/core';
 import InfoBox from './InfoBox';
@@ -19,15 +15,11 @@ import 'leaflet/dist/leaflet.css';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [country, setInputCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
-  const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
   const [caseTableData, setCaseTableData] = useState([]);
   const [vaccineTableData, setVaccineTableData] = useState([]);
   const [casesType, setCasesType] = useState('cases');
-  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
-  const [mapZoom, setMapZoom] = useState(2.5);
   let countryVaccinated = {};
 
   useEffect(() => {
@@ -80,7 +72,6 @@ const App = () => {
                 }
               });
 
-              setCountries(countries);
               setCaseTableData(caseData);
               setVaccineTableData(vaccinatedData);
               setTimeout(() => {
@@ -92,23 +83,6 @@ const App = () => {
     getCountriesData();
   }, []);
 
-  const onCountryChange = async (e) => {
-    const countryCode = e.target.value;
-
-    const url =
-      countryCode === 'worldwide'
-        ? 'https://disease.sh/v3/covid-19/all'
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-    await fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setInputCountry(countryCode);
-        setCountryInfo(data);
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        setMapZoom(4);
-      });
-  };
-
   return (
     <>
       {isLoading ? (
@@ -116,50 +90,12 @@ const App = () => {
       ) : (
         <div className='app'>
           <div className='app__left'>
-            <Card>
-              <div className='app__header'>
-                <Typography variant='h1'>
-                  Worldwide C<i className='fas fa-virus'></i>VID-19 Tracker
-                </Typography>
-                {/* {!isMobile && (
-                <FormControl
-                  query='(min-device-width: 600px)'
-                  className='app__dropdown'
-                >
-                  <Select
-                    variant='outlined'
-                    value={country}
-                    onChange={onCountryChange}
-                  >
-                    <MenuItem value='worldwide'>Worldwide</MenuItem>
-                    {countries.map((country, index) => (
-                      <MenuItem key={index} value={country.value}>
-                        {country.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              )} */}
-              </div>
+            <Card className='app__header'>
+              <Typography variant='h1'>
+                Worldwide C<i className='fas fa-virus'></i>VID-19 Tracker
+              </Typography>
             </Card>
-            {/* {isMobile && (
-            <Card className='mobile__dropdown'>
-              <FormControl className='app__dropdown'>
-                <Select
-                  variant='outlined'
-                  value={country}
-                  onChange={onCountryChange}
-                >
-                  <MenuItem value='worldwide'>Worldwide</MenuItem>
-                  {countries.map((country, index) => (
-                    <MenuItem key={index} value={country.value}>
-                      {country.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Card>
-          )} */}
+
             <div className='app__stats'>
               <InfoBox
                 onClick={() => setCasesType('cases')}
@@ -178,7 +114,7 @@ const App = () => {
                 total={prettyPrintStat(countryInfo.recovered)}
               />
               <InfoBox
-                onClick={(e) => setCasesType('deaths')}
+                onClick={() => setCasesType('deaths')}
                 title='Deaths'
                 color={'dimgray'}
                 active={casesType === 'deaths'}
@@ -186,12 +122,7 @@ const App = () => {
                 total={prettyPrintStat(countryInfo.deaths)}
               />
             </div>
-            <Map
-              countries={mapCountries}
-              casesType={casesType}
-              center={mapCenter}
-              zoom={mapZoom}
-            />
+            <Map countries={mapCountries} casesType={casesType} />
           </div>
           <div className='app__right'>
             <Card className='lineGraphContainer'>
@@ -232,7 +163,7 @@ const App = () => {
                 </div>
               </CardContent>
             </Card>
-            <div className='source'>
+            <h5 className='source'>
               Data from:{' '}
               <a
                 href='https://disease.sh/docs/'
@@ -241,7 +172,7 @@ const App = () => {
               >
                 Open Disease Data API
               </a>
-            </div>
+            </h5>
           </div>
         </div>
       )}
