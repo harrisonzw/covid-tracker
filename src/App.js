@@ -15,7 +15,7 @@ import 'leaflet/dist/leaflet.css';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [countryInfo, setCountryInfo] = useState({});
+  const [globalInfo, setGlobalInfo] = useState({});
   const [mapCountries, setMapCountries] = useState([]);
   const [caseTableData, setCaseTableData] = useState([]);
   const [vaccineTableData, setVaccineTableData] = useState([]);
@@ -26,7 +26,7 @@ const App = () => {
     fetch('https://disease.sh/v3/covid-19/all')
       .then((response) => response.json())
       .then((data) => {
-        setCountryInfo(data);
+        setGlobalInfo(data);
       });
   }, []);
 
@@ -81,7 +81,7 @@ const App = () => {
         });
     };
     getCountriesData();
-  }, []);
+  }, [mapCountries]);
 
   return (
     <>
@@ -102,24 +102,24 @@ const App = () => {
                 title='Cases'
                 color={'red'}
                 active={casesType === 'cases'}
-                cases={prettyPrintStat(countryInfo.todayCases)}
-                total={prettyPrintStat(countryInfo.cases)}
+                cases={prettyPrintStat(globalInfo.todayCases)}
+                total={prettyPrintStat(globalInfo.cases)}
               />
               <InfoBox
                 onClick={() => setCasesType('recovered')}
                 title='Recovered'
                 color={'seagreen'}
                 active={casesType === 'recovered'}
-                cases={prettyPrintStat(countryInfo.todayRecovered)}
-                total={prettyPrintStat(countryInfo.recovered)}
+                cases={prettyPrintStat(globalInfo.todayRecovered)}
+                total={prettyPrintStat(globalInfo.recovered)}
               />
               <InfoBox
                 onClick={() => setCasesType('deaths')}
                 title='Deaths'
                 color={'dimgray'}
                 active={casesType === 'deaths'}
-                cases={prettyPrintStat(countryInfo.todayDeaths)}
-                total={prettyPrintStat(countryInfo.deaths)}
+                cases={prettyPrintStat(globalInfo.todayDeaths)}
+                total={prettyPrintStat(globalInfo.deaths)}
               />
             </div>
             <Map countries={mapCountries} casesType={casesType} />
