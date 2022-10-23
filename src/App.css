@@ -94,6 +94,8 @@ body {
 
   .app__stats {
     height: 17vh;
+    display: flex;
+    justify-content: space-evenly;
   }
 
   .app__information {

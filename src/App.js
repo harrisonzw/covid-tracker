@@ -81,7 +81,7 @@ const App = () => {
         });
     };
     getCountriesData();
-  }, [mapCountries]);
+  }, []);
 
   return (
     <>
